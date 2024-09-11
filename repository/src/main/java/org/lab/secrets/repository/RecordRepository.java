@@ -18,8 +18,8 @@ public class RecordRepository  implements IRepository<Record> {
     }
 
     @Override
-    public Long deleteRecord(Long id) {
-        return 0L;
+    public void deleteRecord(Long id) {
+
     }
 
     @Override

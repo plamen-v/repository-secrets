@@ -1,16 +1,6 @@
 package org.lab.secrets.repository.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapKeyColumn;
+import jakarta.persistence.*;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,7 +19,7 @@ public class Record {
     @Column(name="url")
     private String url;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "RECORDS_SECRETS",
             joinColumns = {@JoinColumn(name = "record_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "secret_key")

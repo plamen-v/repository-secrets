@@ -1,8 +1,10 @@
 FROM maven:3.9.9-eclipse-temurin-22-alpine
-
-WORKDIR /app
-
+WORKDIR /secret_app
 COPY . .
-RUN mvn clean install package
-
+RUN mvn -X clean install -DskipTests=true
+WORKDIR /secret_app/app
 CMD ["mvn", "spring-boot:run"]
+
+
+
+

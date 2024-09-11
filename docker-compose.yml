@@ -32,8 +32,8 @@ services:
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
         "spring.jpa.hibernate.ddl-auto" : "update"
       }'
-    volumes:
-      - .m2:/root/.m2
+
+
     stdin_open: true
     tty: true
 

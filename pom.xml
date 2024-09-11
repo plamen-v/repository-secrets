@@ -8,11 +8,21 @@
 		<version>3.3.3</version>
 		<relativePath/>
 	</parent>
-	<groupId>org.lab</groupId>
-	<artifactId>secrets</artifactId>
+	<groupId>org.lab.secrets</groupId>
+	<artifactId>parent</artifactId>
 	<version>0.0.1</version>
-	<name>secrets</name>
+	<name>parent</name>
 	<description>Manage repositories secrets</description>
+	<packaging>pom</packaging>
+	<modules>
+<!--		<module>core</module>-->
+<!--		<module>service</module>-->
+<!--		<module>service</module>-->
+<!--		<module>web</module>-->
+
+		<module>app</module>
+	</modules>
+
 	<properties>
 		<java.version>22</java.version>
 	</properties>
@@ -30,18 +40,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.7.4</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.postgresql</groupId>-->
+<!--			<artifactId>postgresql</artifactId>-->
+<!--			<version>42.7.4</version>-->
+<!--		</dependency>-->
 	</dependencies>
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+<!--		<plugins>-->
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--			</plugin>-->
+<!--		</plugins>-->
 	</build>
 </project>

@@ -1,14 +1,16 @@
 package org.lab.secrets.service;
 
-import org.lab.secrets.core.repository.IRepository;
-import org.lab.secrets.repository.model.Record;
-import org.lab.secrets.core.service.IService;
+import org.lab.secrets.core.repository.IRecordRepository;
+import org.lab.secrets.core.model.Record;
+import org.lab.secrets.core.service.IRecordService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class RecordService implements IService<Record> {
-    private final IRepository<Record> repository;
-    public RecordService(IRepository<Record> repository){
+@Service
+public class RecordService implements IRecordService {
+    private final IRecordRepository repository;
+    public RecordService(IRecordRepository repository){
         this.repository = repository;
     }
 
@@ -18,7 +20,8 @@ public class RecordService implements IService<Record> {
     }
 
     @Override
-    public Record saveRecord(Record element) {
+    public Record saveRecord(Record record) {
+        repository.saveRecord(null);
         return null;
     }
 

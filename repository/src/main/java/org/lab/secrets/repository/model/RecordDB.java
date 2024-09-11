@@ -2,14 +2,12 @@ package org.lab.secrets.repository.model;
 
 import jakarta.persistence.*;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 @Entity
 @Table(name = "RECORDS")
-public class Record {
+public class RecordDB {
     @Id
     @SequenceGenerator(name = "records_seq", sequenceName= "records_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "records_seq", strategy=GenerationType.SEQUENCE)

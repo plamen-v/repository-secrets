@@ -21,46 +21,44 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-test</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.lab.secrets</groupId>
             <artifactId>core</artifactId>
             <version>0.0.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.lab.secrets</groupId>
-            <artifactId>repository</artifactId>
-            <version>0.0.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.lab.secrets</groupId>-->
+<!--            <artifactId>repository</artifactId>-->
+<!--            <version>0.0.1</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.lab.secrets</groupId>
             <artifactId>service</artifactId>
             <version>0.0.1</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
 <!--            <plugin>-->
 <!--                <artifactId>maven-dependency-plugin</artifactId>-->
 <!--                <executions>-->
 <!--                    <execution>-->
-<!--                        <phase>install</phase>-->
+<!--                        <phase>package</phase>-->
 <!--                        <goals>-->
 <!--                            <goal>copy-dependencies</goal>-->
 <!--                        </goals>-->
 <!--                    </execution>-->
 <!--                </executions>-->
 <!--            </plugin>-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 </project>

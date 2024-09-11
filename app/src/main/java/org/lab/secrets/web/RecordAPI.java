@@ -1,6 +1,7 @@
 package org.lab.secrets.web;
 
-import org.lab.secrets.core.service.IService;
+import org.lab.secrets.core.service.IRecordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,10 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
-public class RecordApi {
-    private final IService<org.lab.secrets.repository.model.Record> service;
-    public RecordApi(IService service) {
-        this.service = service;
+public class RecordAPI {
+    @Autowired
+    private IRecordService service;
+
+    public RecordAPI() {
     }
 
     @GetMapping("/all")

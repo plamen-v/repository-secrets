@@ -1,4 +1,4 @@
-package org.plamen.repository_secrets;
+package org.lab.secrets;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -6,8 +6,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class SecretsApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
 
 }

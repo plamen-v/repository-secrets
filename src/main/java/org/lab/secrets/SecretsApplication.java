@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SecretsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RepositorySecretsApplication.class, args);
+		SpringApplication.run(SecretsApplication.class, args);
 	}
 
 }

@@ -15,11 +15,8 @@
 	<description>Manage repositories secrets</description>
 	<packaging>pom</packaging>
 	<modules>
-<!--		<module>core</module>-->
-<!--		<module>service</module>-->
-<!--		<module>service</module>-->
-<!--		<module>web</module>-->
-
+		<module>core</module>
+		<module>repository</module>
 		<module>app</module>
 	</modules>
 

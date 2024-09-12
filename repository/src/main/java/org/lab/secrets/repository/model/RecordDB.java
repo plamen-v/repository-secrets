@@ -1,7 +1,7 @@
 package org.lab.secrets.repository.model;
 
 import jakarta.persistence.*;
-
+import org.lab.secrets.core.model.Record;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +24,8 @@ public class RecordDB {
     @Column(name = "secret_key")
     private Set<String> secrets = new HashSet<>();
 
+    public RecordDB(){}
+
     public Long getId() {
         return id;
     }
@@ -45,5 +47,13 @@ public class RecordDB {
 
     public void setSecrets(Set<String> secrets) {
         this.secrets = secrets;
+    }
+
+    public Record toRecord(){
+        Record record = new Record();
+        record.setId(this.getId());
+        record.setUrl(this.getUrl());
+        record.setSecrets(this.getSecrets());
+        return record;
     }
 }

@@ -1,6 +1,12 @@
 package org.lab.secrets.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.Tuple;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.lab.secrets.core.repository.IRecordRepository;
 import org.lab.secrets.core.model.Record;
 import org.lab.secrets.repository.model.RecordDB;
@@ -8,9 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.beans.PropertyEditorSupport;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
+//TODO! encript if secret value will not be used.
 @Repository
 public class RecordRepository  implements IRecordRepository {
     @Autowired
@@ -20,36 +29,88 @@ public class RecordRepository  implements IRecordRepository {
 
     @Override
     public List<Record> getAllRecords() {
-        return List.of();
+        CriteriaBuilder criteriaBuilder =  em.getCriteriaBuilder();
+        CriteriaQuery<RecordDB> criteriaQuery = criteriaBuilder.createQuery(RecordDB.class);
+
+        Root<RecordDB> root = criteriaQuery.from(RecordDB.class);
+        criteriaQuery.select(root);
+        TypedQuery<RecordDB> query = em.createQuery(criteriaQuery);
+        List<RecordDB> rulesets = query.getResultList();
+
+        return rulesets.stream().map(x -> x.toRecord()).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public Record saveRecord(Record record) {
-        //RecordDB objNew = em.find(RecordDB.class, 0 );
+        RecordDB recordDB = em.find(RecordDB.class, record.getId() == null ? 0 : record.getId());
+        if(Objects.isNull(recordDB)){
+            recordDB = new RecordDB();
+        }
+        recordDB.setUrl(record.getUrl());
+        em.persist(recordDB);
 
-        RecordDB dbRecord = new RecordDB();
-        LocalDateTime dt = LocalDateTime.now();
-        dbRecord.setUrl(dt.toString());
-        em.persist(dbRecord);
-        return new Record();
+        return recordDB.toRecord();
     }
 
     @Override
     @Transactional
-    public void deleteRecord(Long id) {
-
+    public Boolean deleteRecord(Long recordId) {
+        RecordDB recordDB = em.find(RecordDB.class, recordId == null ? 0 : recordId);
+        if(!Objects.isNull(recordDB)) {
+            em.remove(recordDB);
+            return true;
+        }
+        return false;
     }
 
     @Override
     @Transactional
-    public void saveSecret(Long id, String key, String value) {
+    public Boolean saveSecret(Long recordId, String secretKey, String secretValue) {
+        RecordDB recordDB = em.find(RecordDB.class, recordId == null ? 0 : recordId);
+        //TODO! what if not exists record
+        if(!Objects.isNull(recordDB)) {
+            //update
+            Query query = em.createNativeQuery("UPDATE RECORDS_SECRETS SET secret_key = :secret_key, secret_value = :secret_value WHERE record_id = :record_id AND secret_key = :secret_key");
+            query.setParameter("record_id", recordId);
+            query.setParameter("secret_key", secretKey);
+            query.setParameter("secret_value", secretValue);
 
+            int cnt = query.executeUpdate();
+            if(cnt == 0){
+                //insert
+                query = em.createNativeQuery("INSERT INTO RECORDS_SECRETS(record_id, secret_key, secret_value) VALUES(:record_id, :secret_key, :secret_value)");
+                query.setParameter("record_id", recordId);
+                query.setParameter("secret_key", secretKey);
+                query.setParameter("secret_value", secretValue);
+                cnt = query.executeUpdate();
+            }
+
+            return true;
+        }
+        return false;
     }
 
     @Override
     @Transactional
-    public void deleteSecret(Long id, String key) {
+    public Boolean deleteSecret(Long recordId, String secretKey) {
+        RecordDB recordDB = em.find(RecordDB.class, recordId == null ? 0 : recordId );
+        if(!Objects.isNull(recordDB)) {
+            recordDB.getSecrets().remove(secretKey);
+            em.persist(recordDB);
+            return true;
+        }
+        return false;
+    }
 
+    @Override
+    public Boolean isSecretCorrect(Long recordId, String secretKey, String secretValue) {
+        Query query = em.createNativeQuery("SELECT record_id FROM RECORDS_SECRETS WHERE record_id = :record_id AND secret_key = :secret_key AND secret_value = :secret_value");
+        query.setParameter("record_id", recordId);
+        query.setParameter("secret_key", secretKey);
+        query.setParameter("secret_value", secretValue);
+        List<Tuple> result = query.getResultList();
+
+        return result.size() != 0;
     }
 }

@@ -9,13 +9,5 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppConfiguration {
-//    @Bean
-//    IRecordRepository repositoryBuilder(){
-//        return new RecordRepository(EntityManager em);
-//    }
 
-//    @Bean
-//    IRecordService serviceBuilder(IRecordRepository repository){
-//        return new RecordService(repository);
-//    }
 }

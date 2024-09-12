@@ -16,27 +16,32 @@ public class RecordService implements IRecordService {
 
     @Override
     public List<Record> getAllRecords() {
-        return List.of();
+        return repository.getAllRecords();
     }
 
     @Override
     public Record saveRecord(Record record) {
-        repository.saveRecord(null);
-        return null;
+        record = repository.saveRecord(record);
+        return record;
     }
 
     @Override
-    public void deleteRecord(Long id) {
-
+    public Boolean deleteRecord(Long recordId) {
+        return repository.deleteRecord(recordId);
     }
 
     @Override
-    public void saveSecret(Long id, String key, String value) {
-
+    public Boolean saveSecret(Long recordId, String secretKey, String secretValue) {
+        return repository.saveSecret(recordId, secretKey, secretValue);
     }
 
     @Override
-    public void deleteSecret(Long id, String key) {
+    public Boolean deleteSecret(Long recorId, String secretKey) {
+        return repository.deleteSecret(recorId, secretKey);
+    }
 
+    @Override
+    public Boolean isSecretCorrect(Long recordId, String secretKey, String secretValue) {
+        return repository.isSecretCorrect(recordId, secretKey, secretValue);
     }
 }

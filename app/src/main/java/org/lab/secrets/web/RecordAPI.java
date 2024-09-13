@@ -1,12 +1,11 @@
 package org.lab.secrets.web;
 
 import org.lab.secrets.core.model.Record;
+import org.lab.secrets.core.model.Secret;
 import org.lab.secrets.core.service.IRecordService;
-import org.lab.secrets.web.model.SecretRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,42 +29,41 @@ public class RecordAPI {
     }
 
     @PutMapping("/records")
-    public Boolean update(@RequestBody Record record) {
-        service.saveRecord(record);
-        return true;
+    public Record update(@RequestBody Record record) {
+        return service.saveRecord(record);
     }
 
     @DeleteMapping("/records/{id}")
-    public Boolean delete(@PathVariable("id") Long recordId) {
+    public Record delete(@PathVariable("id") Long recordId) {
         return service.deleteRecord(recordId);
     }
 
     @PostMapping("/secrets")
-    public Boolean createSecret(@RequestBody SecretRequest secret) {
+    public Secret createSecret(@RequestBody Secret secret) {
         if(!Objects.isNull(secret)) {
             return service.saveSecret(secret.getRecordId(), secret.getKey(), secret.getValue());
         }
-        return false;
+        return null;
     }
 
     @PutMapping("/secrets")
-    public Boolean updateSecret(@RequestBody SecretRequest secret) {
+    public Secret updateSecret(@RequestBody Secret secret) {
         if(!Objects.isNull(secret)) {
             return service.saveSecret(secret.getRecordId(), secret.getKey(), secret.getValue());
         }
-        return false;
+        return null;
     }
 
     @DeleteMapping("/secrets")
-    public Boolean deleteSecret(@RequestBody SecretRequest secret ) {
+    public Secret deleteSecret(@RequestBody Secret secret ) {
         if(!Objects.isNull(secret)) {
             return service.deleteSecret(secret.getRecordId(), secret.getKey());
         }
-        return false;
+        return null;
     }
 
     @PostMapping("/secrets/check")
-    public Boolean isSecretCorrect(@RequestBody SecretRequest secret ) {
+    public Boolean isSecretCorrect(@RequestBody Secret secret ) {
         if(!Objects.isNull(secret)) {
             return service.isSecretCorrect(secret.getRecordId(), secret.getKey(), secret.getValue());
         }

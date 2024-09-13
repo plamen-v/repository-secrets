@@ -1,9 +1,15 @@
-package org.lab.secrets.web.model;
+package org.lab.secrets.core.model;
 
-public class SecretRequest {
+public class Secret {
     private Long recordId;
     private String key;
     private String value;
+
+    public Secret(Long recordId, String key, String value){
+        this.recordId = recordId;
+        this.key = key;
+        this.value = value;
+    }
 
     public Long getRecordId() {
         return recordId;

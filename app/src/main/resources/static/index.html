@@ -3,56 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <title>Repository Secrets</title>
-          <link rel="stylesheet" href="css/style.css" />
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     </head>
     <body>
-
-
-<!-- Link to open the modal
-    <div id="ex1" class="modal">
-  <p>Thanks for clicking. That felt good.</p>
-  <a href="#" rel="modal:close">Close</a>
-</div>
-
-
-<p><a  class="btn" href="#ex1" rel="modal:open">Open Modal</a></p>
- -->
-
-<div id="pnl-secret-check" class="modal">
-  <input type="text" id="txt-url" name="vehicle1" placeholder="url">
-  <input type="text" id="txt-secret-key"  placeholder="key">
-  <input type="text" id="txt-secret-value"  placeholder="secret">
-</div>
-
-<!--
-<table>
-    <thead>
-        <tr>
-            <th>
-                <label for="vehicle1"> Include Secrets</label>
-                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-            </th>
-            <th>
-             <button type="button">Load Repositories</button>
-            </th>
-             <th>
-             <a  class="btn" href="#pnl-secret-check" rel="modal:open">Check Secret</a>
-            </th>
-        </tr>
-    </thead>
-</table>
--->
-
-        <div id="pnlMain">
-            <h2>Repository Secrets</h2>
-            <div id="pnlRecordsControlPanel"></div>
-            <div id="pnlRecords">
-                <table id="tblRecords">
+        <div id="pnlApp">
+            <h1>Repository Secrets</h1>
+            <div id="pnlControls">
+                 <a id="btnAddRepo" class="btn" href="#">Add Repository</a>
+            </div>
+            <div id="pnlRepo">
+                <table id="tblRepo">
                     <thead>
                         <tr>
-                            <th>URL</th>
-                            <th></th>
+                            <th colspan="2">Repository</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,9 +25,56 @@
                 </table>
             </div>
         </div>
+
+        <div id="pnlRepoAddEdit" class="modal">
+            <span id="lblAction"></span>
+            <input type="text" id="txtRepoUrl" placeholder="Enter repository URL"/>
+            <a class="btn btn-save" href="#" >Save</a>
+            <a class="btn btn-close" href="#" rel="modal:close">Close</a>
+            <input id="hdnRepoId" type="hidden" value=""/>
+        </div>
+
+        <div id="pnlRepoDelete" class="modal">
+            <h1 id="lblAction">Delete <span id="lblRepoUrl"></span></h1>
+            <a class="btn btn-ok" href="#" >Yes</a>
+            <a class="btn btn-close" href="#" rel="modal:close">No</a>
+        </div>
+
+        <div id="pnlRepoSecretAddEdit" class="modal">
+            <span id="lblAction"></span>
+            <span id="lblRepoUrl"></span>
+
+            <input type="text" id="txtRepoSecretKey" placeholder="Enter secret key"/>
+            <input type="text" id="txtRepoSecretValue" placeholder="Enter secret"/>
+
+            <a class="btn btn-save" href="#" >Save</a>
+            <a class="btn btn-close" href="#" rel="modal:close">Close</a>
+            <input id="hdnRepoId" type="hidden" value=""/>
+        </div>
+
+        <div id="pnlRepoSecretDelete" class="modal">
+            <h1 id="lblAction">Delete <span id="lblRepoSecretKey"></span> of <span id="lblRepoUrl"></span></h1>
+             <input id="hdnRepoId" type="hidden" value=""/>
+             <input id="hdnRepoSecretKey" type="hidden" value=""/>
+
+            <a class="btn btn-ok" href="#" >Yes</a>
+            <a class="btn btn-close" href="#" rel="modal:close">No</a>
+        </div>
+
+         <div id="pnlRepoSecretCheck" class="modal">
+            <span id="lblRepoUrl"></span>
+            <span id="lblRepoSecretKey"></span>
+
+            <input type="text" id="txtRepoSecretValue" placeholder="Enter secret"/>
+            <input id="hdnRepoId" type="hidden" value=""/>
+            <input id="hdnRepoSecretKey" type="hidden" value=""/>
+
+            <a class="btn btn-ok" href="#" >Check</a>
+            <a class="btn btn-close" href="#" rel="modal:close">Close</a>
+        </div>
     </body>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-
     <script src="js/app.js"></script>
 </html>

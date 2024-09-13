@@ -7,6 +7,7 @@ import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import org.lab.secrets.core.model.Secret;
 import org.lab.secrets.core.repository.IRecordRepository;
 import org.lab.secrets.core.model.Record;
 import org.lab.secrets.repository.model.RecordDB;
@@ -55,18 +56,18 @@ public class RecordRepository  implements IRecordRepository {
 
     @Override
     @Transactional
-    public Boolean deleteRecord(Long recordId) {
+    public Record deleteRecord(Long recordId) {
         RecordDB recordDB = em.find(RecordDB.class, recordId == null ? 0 : recordId);
         if(!Objects.isNull(recordDB)) {
             em.remove(recordDB);
-            return true;
+            return recordDB.toRecord();
         }
-        return false;
+        return null;//TODO!
     }
 
     @Override
     @Transactional
-    public Boolean saveSecret(Long recordId, String secretKey, String secretValue) {
+    public Secret saveSecret(Long recordId, String secretKey, String secretValue) {
         RecordDB recordDB = em.find(RecordDB.class, recordId == null ? 0 : recordId);
         //TODO! what if not exists record
         if(!Objects.isNull(recordDB)) {
@@ -86,21 +87,23 @@ public class RecordRepository  implements IRecordRepository {
                 cnt = query.executeUpdate();
             }
 
-            return true;
+            return new Secret(recordId, secretKey, null);
         }
-        return false;
+        return null;
     }
 
     @Override
     @Transactional
-    public Boolean deleteSecret(Long recordId, String secretKey) {
+    public Secret deleteSecret(Long recordId, String secretKey) {
         RecordDB recordDB = em.find(RecordDB.class, recordId == null ? 0 : recordId );
         if(!Objects.isNull(recordDB)) {
             recordDB.getSecrets().remove(secretKey);
             em.persist(recordDB);
-            return true;
+
+            return new Secret(recordId, secretKey, null);
         }
-        return false;
+
+        return null;
     }
 
     @Override

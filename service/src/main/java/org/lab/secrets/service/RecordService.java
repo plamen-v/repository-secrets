@@ -1,5 +1,6 @@
 package org.lab.secrets.service;
 
+import org.lab.secrets.core.model.Secret;
 import org.lab.secrets.core.repository.IRecordRepository;
 import org.lab.secrets.core.model.Record;
 import org.lab.secrets.core.service.IRecordService;
@@ -26,17 +27,17 @@ public class RecordService implements IRecordService {
     }
 
     @Override
-    public Boolean deleteRecord(Long recordId) {
+    public Record deleteRecord(Long recordId) {
         return repository.deleteRecord(recordId);
     }
 
     @Override
-    public Boolean saveSecret(Long recordId, String secretKey, String secretValue) {
+    public Secret saveSecret(Long recordId, String secretKey, String secretValue) {
         return repository.saveSecret(recordId, secretKey, secretValue);
     }
 
     @Override
-    public Boolean deleteSecret(Long recorId, String secretKey) {
+    public Secret deleteSecret(Long recorId, String secretKey) {
         return repository.deleteSecret(recorId, secretKey);
     }
 

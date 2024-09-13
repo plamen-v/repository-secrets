@@ -7,7 +7,63 @@
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     </head>
     <body>
-        <h1>TEST</h1>
+
+
+<!-- Link to open the modal
+    <div id="ex1" class="modal">
+  <p>Thanks for clicking. That felt good.</p>
+  <a href="#" rel="modal:close">Close</a>
+</div>
+
+
+<p><a  class="btn" href="#ex1" rel="modal:open">Open Modal</a></p>
+ -->
+
+<div id="pnl-secret-check" class="modal">
+  <input type="text" id="txt-url" name="vehicle1" placeholder="url">
+  <input type="text" id="txt-secret-key"  placeholder="key">
+  <input type="text" id="txt-secret-value"  placeholder="secret">
+</div>
+
+<!--
+<table>
+    <thead>
+        <tr>
+            <th>
+                <label for="vehicle1"> Include Secrets</label>
+                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+            </th>
+            <th>
+             <button type="button">Load Repositories</button>
+            </th>
+             <th>
+             <a  class="btn" href="#pnl-secret-check" rel="modal:open">Check Secret</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+-->
+
+        <div id="pnlMain">
+            <h2>Repository Secrets</h2>
+            <div id="pnlRecordsControlPanel"></div>
+            <div id="pnlRecords">
+                <table id="tblRecords">
+                    <thead>
+                        <tr>
+                            <th>URL</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <!--Data-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+
     <script src="js/app.js"></script>
 </html>

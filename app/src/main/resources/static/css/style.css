@@ -1,0 +1,39 @@
+body{
+    background-color: #f5f6f7;/*#94d0f1*/
+}
+
+#pnlMain{
+    margin: auto;
+    width: 90%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+#pnlMain h2{
+    text-align:center;
+}
+
+
+#pnlRecords{
+    margin: auto;
+    width: 95%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+#tblRecords{
+    margin: auto;
+    width: 100%;
+    padding: 0px;
+}
+
+table{
+    border:1px solid black;
+}
+
+th{
+    border:1px solid black;
+}
+td{
+    border:1px solid black;
+}

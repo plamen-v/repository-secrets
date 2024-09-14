@@ -1,5 +1,7 @@
 package org.lab.secrets.core.model;
 
+import java.util.Objects;
+
 public class Secret {
     private Long recordId;
     private String key;
@@ -20,7 +22,7 @@ public class Secret {
     }
 
     public String getKey() {
-        return key;
+        return !Objects.isNull(key) ? (key.trim().isEmpty() ? null : key) : key;
     }
 
     public void setKey(String key) {
@@ -28,7 +30,7 @@ public class Secret {
     }
 
     public String getValue() {
-        return value;
+        return !Objects.isNull(value) ? (value.trim().isEmpty() ? null : value) : value;
     }
 
     public void setValue(String value) {

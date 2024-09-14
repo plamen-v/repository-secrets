@@ -1,6 +1,7 @@
 package org.lab.secrets.core.model;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Record {
@@ -16,7 +17,7 @@ public class Record {
         this.id = id;
     }
     public String getUrl() {
-        return url;
+        return !Objects.isNull(url) ? (url.trim().isEmpty() ? null : url) : url;
     }
     public void setUrl(String url) {
         this.url = url;

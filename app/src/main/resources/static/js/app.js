@@ -9,10 +9,8 @@ function init(){
         url: "http://" + window.location.host + "/api/records",
         type: 'GET',
         success: function(res) {
-            console.log(res);
             addRecordRows(res);
 
-            //bind controls
             $(".btn-repo-add").on('click',  {mode: 'ADD'}, openRepositoryAddEditSecretPanel);
             $(".btn-repo-edit").on('click',  {mode: 'EDIT'}, openRepositoryAddEditPanel);
             $(".btn-repo-delete").on('click',  null, openRepositoryDeletePanel);
@@ -49,7 +47,6 @@ function addRecordRow(record){
     tBody.prepend(rows);
     let newRow = $('.tr-repo[repo-id="' + record.id + '"]');
 
-    console.log(newRow);
     newRow.find(".btn-repo-add").on('click',  {mode: 'ADD'}, openRepositoryAddEditSecretPanel);
     newRow.find(".btn-repo-edit").on('click',  {mode: 'EDIT'}, openRepositoryAddEditPanel);
     newRow.find(".btn-repo-delete").on('click',  null, openRepositoryDeletePanel);
@@ -72,7 +69,6 @@ function deleteRecordSecretRow(secret){
 }
 
 function addSecretRow(secret){
-    console.log(secret);
     let repoRow = $('#tblRepo > tbody .tr-repo').filter('[repo-id="' + secret.recordId + '"]');
     let secretRow = generateSecretRow(secret.recordId, secret.key);
     repoRow.after(secretRow);
@@ -81,7 +77,6 @@ function addSecretRow(secret){
      newRow.find(".btn-repo-secret-check").on('click',  null, openRepositorySecretCheckPanel);
      newRow.find(".btn-repo-secret-edit").on('click',  {mode: 'EDIT'}, openRepositoryAddEditSecretPanel);
      newRow.find(".btn-repo-secret-delete").on('click',  null, openRepositorySecretDeletePanel);
-
 }
 
 function generateRecordRow(record){
@@ -347,12 +342,7 @@ function openRepositorySecretCheckPanel(e){
 }
 
 function openErrorPanel(error){
-
-    $("#pnlError").modal({
-        escapeClose: false,
-        clickClose: false,
-        showClose: false
-    });
+    $("#pnlError").modal();
 }
 
 function webRequest(e){
@@ -371,4 +361,3 @@ function webRequest(e){
         openErrorPanel(error);
     });
 }
-//window.location.host

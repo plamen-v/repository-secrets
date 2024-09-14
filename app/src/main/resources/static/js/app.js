@@ -6,7 +6,7 @@ function init(){
     $("#btnAddRepo").on('click',  {mode: 'ADD'}, openRepositoryAddEditPanel);
 
     $.ajax({
-        url: "http://localhost:8081/api/records",
+        url: "http://" + window.location.host + "/api/records",
         type: 'GET',
         success: function(res) {
             console.log(res);
@@ -19,7 +19,7 @@ function init(){
 
             $(".btn-repo-secret-check").on('click',  null, openRepositorySecretCheckPanel);
             $(".btn-repo-secret-edit").on('click',  {mode: 'EDIT'}, openRepositoryAddEditSecretPanel);
-            $(".bnt-repo-secret-delete").on('click',  null, openRepositorySecretDeletePanel);
+            $(".btn-repo-secret-delete").on('click',  null, openRepositorySecretDeletePanel);
         }
     });
 }
@@ -80,17 +80,17 @@ function addSecretRow(secret){
     let newRow = $('.tr-repo-secret[repo-id="' + secret.recordId + '"]');
      newRow.find(".btn-repo-secret-check").on('click',  null, openRepositorySecretCheckPanel);
      newRow.find(".btn-repo-secret-edit").on('click',  {mode: 'EDIT'}, openRepositoryAddEditSecretPanel);
-     newRow.find(".bnt-repo-secret-delete").on('click',  null, openRepositorySecretDeletePanel);
+     newRow.find(".btn-repo-secret-delete").on('click',  null, openRepositorySecretDeletePanel);
 
 }
 
 function generateRecordRow(record){
     return "<tr class='tr-repo' repo-id='" + record.id + "' repo-url='" +  record.url + "'>"
     + "<td class='data'>" + record.url + "</td>"
-    + "<td>"
-    + "<a class='btn btn-repo-add'>add secret</a>"
-    + "<a class='btn btn-repo-edit'>edit</a>"
-    + "<a class='btn btn-repo-delete'>delete</a>"
+    + "<td class='ctrl'>"
+    + "<a class='btn btn-repo-delete' title='Remove Repository'>&#128473;</a>"
+    + "<a class='btn btn-repo-edit' title='Edit Repository'>&#128393;</a>"
+    + "<a class='btn btn-repo-add' title='Add Secret'>&#10133;</a>"
     + "</td>"
     + "</tr>";
 }
@@ -98,10 +98,10 @@ function generateRecordRow(record){
 function generateSecretRow(recordId, secretKey){
     return "<tr class='tr-repo-secret' repo-id='" + recordId + "' secret-key='" + secretKey + "'>"
     + "<td class='data'>" + secretKey + "</td>"
-    + "<td>"
-    + "<a class='btn btn-repo-secret-check'>check</a>"
-    + "<a class='btn btn-repo-secret-edit'>edit</a>"
-    + "<a class='btn bnt-repo-secret-delete'>delete</a>"
+    + "<td class='ctrl'>"
+    + "<a class='btn btn-repo-secret-delete' title='Remove Secret'>&#128473;</a>"
+    + "<a class='btn btn-repo-secret-edit' title='Edit Secret'>&#128393;</a>"
+    + "<a class='btn btn-repo-secret-check' title='Check Secret'>&#x2714;</a>"
     + "</td>"
     + "</tr>";
 }
@@ -110,14 +110,14 @@ function notifyRecordSecretCheck(secret, check){
     let repoSecretRow = $('#tblRepo > tbody tr.tr-repo-secret').filter('[repo-id="' + secret.recordId + '"][secret-key="' + secret.key + '"]');
 
     if(check){
-        repoSecretRow.find("td.data").addClass('check-correct')
+        repoSecretRow.find("td").addClass('check-correct')
     }else{
-        repoSecretRow.find("td.data").addClass('check-not-correct')
+        repoSecretRow.find("td").addClass('check-not-correct')
     }
 
     setTimeout(function(){
-        repoSecretRow.find("td.data").removeClass('check-not-correct');
-        repoSecretRow.find("td.data").removeClass('check-correct');
+        repoSecretRow.find("td").removeClass('check-not-correct');
+        repoSecretRow.find("td").removeClass('check-correct');
 
     }, 5000);
 
@@ -131,7 +131,6 @@ function openRepositoryAddEditPanel(e){
 
     //clear data
     pnl.find("#lblAction").html("");
-    pnl.find("#lblRepoUrl").html("")
     pnl.find("#txtRepoUrl").val("");
     pnl.find("#hdnRepoId").val(0);
 
@@ -139,7 +138,7 @@ function openRepositoryAddEditPanel(e){
     let callback = null;
     //Set Mode
     if(e.data.mode == "ADD"){
-        pnl.find("h1").html("Add Repository");
+        pnl.find("#lblAction").html("Add Repository");
         pnl.find("#hdnRepoId").val(0);
         method = "POST";
         callback = function(record){
@@ -147,7 +146,7 @@ function openRepositoryAddEditPanel(e){
             $("#pnlRepoAddEdit .btn-close").click();
         }
     }else if(e.data.mode == "EDIT"){
-        pnl.find("h1").html("Edit Repository");
+        pnl.find("#lblAction").html("Edit Repository");
         pnl.find("#txtRepoUrl").val(tr.attr("repo-url"));
         pnl.find("#hdnRepoId").val(tr.attr("repo-id"));
         method = "PUT";
@@ -160,7 +159,7 @@ function openRepositoryAddEditPanel(e){
     pnl.find(".btn-save").off('click');
     pnl.find(".btn-save").on(
         'click', {
-            url: "http://localhost:8081/api/records",
+            url: "http://" + window.location.host + "/api/records",
             method: method,
             getData: function(){
                 let pnl = $("#pnlRepoAddEdit");
@@ -186,12 +185,10 @@ function openRepositoryDeletePanel(e){
       let pnl = $("#pnlRepoDelete");
       let tr = $(e.target).parent().parent();
 
-      pnl.find("#lblRepoUrl").html(tr.attr("repo-url"));
-
       pnl.find(".btn-ok").off('click');
       pnl.find(".btn-ok").on(
           'click', {
-              url: "http://localhost:8081/api/records/" + tr.attr("repo-id"),
+              url: "http://" + window.location.host + "/api/records/" + tr.attr("repo-id"),
               method: "DELETE",
               getData: function(){return null},
               callback: function(record){
@@ -218,7 +215,6 @@ function openRepositoryAddEditSecretPanel(e){
 
     //clear data
     pnl.find("#lblAction").html("");
-    pnl.find("#lblRepoUrl").html("")
     pnl.find("#txtRepoSecretKey").val("");
     pnl.find("#txtRepoSecretValue").val("");
     pnl.find("#hdnRepoId").val(0);
@@ -227,7 +223,6 @@ function openRepositoryAddEditSecretPanel(e){
     let method = "";
     let callback = null;
     pnl.find("#hdnRepoId").val(tr.attr("repo-id"));
-    pnl.find("#lblRepoUrl").html(tr.attr("repo-url"));
 
     if(e.data.mode == "ADD"){
         pnl.find("#lblAction").html("Add Secret");
@@ -252,7 +247,7 @@ function openRepositoryAddEditSecretPanel(e){
     pnl.find(".btn-save").off('click');
     pnl.find(".btn-save").on(
         'click', {
-            url: "http://localhost:8081/api/secrets",
+            url: "http://" + window.location.host + "/api/secrets",
             method: method,
             getData: function(){
                 let pnl = $("#pnlRepoSecretAddEdit");
@@ -279,16 +274,13 @@ function openRepositorySecretDeletePanel(e){
     let pnl = $("#pnlRepoSecretDelete");
     let tr = $(e.target).parent().parent();
 
-    pnl.find("#lblRepoUrl").html($('#tblRepo .tr-repo[repo-id="' + tr.attr("repo-id") + '"]').attr("repo-url"));
-    pnl.find("#lblRepoSecretKey").html(tr.attr("secret-key"));
-
     pnl.find("#hdnRepoId").val(tr.attr("repo-id"));
     pnl.find("#hdnRepoSecretKey").val(tr.attr("secret-key"));
 
     pnl.find(".btn-ok").off('click');
     pnl.find(".btn-ok").on(
         'click', {
-            url: "http://localhost:8081/api/secrets",
+            url: "http://" + window.location.host + "/api/secrets",
             method: "DELETE",
             getData: function(){
                 let pnl = $("#pnlRepoSecretDelete");
@@ -317,10 +309,7 @@ function openRepositorySecretCheckPanel(e){
     let pnl = $("#pnlRepoSecretCheck");
     let tr = $(e.target).parent().parent();
 
-     pnl.find("#txtRepoSecretValue").val("");
-
-    pnl.find("#lblRepoUrl").html($('#tblRepo .tr-repo[repo-id="' + tr.attr("repo-id") + '"]').attr("repo-url"));
-    pnl.find("#lblRepoSecretKey").html(tr.attr("secret-key"));
+    pnl.find("#txtRepoSecretValue").val("");
 
     pnl.find("#hdnRepoId").val(tr.attr("repo-id"));
     pnl.find("#hdnRepoSecretKey").val(tr.attr("secret-key"));
@@ -328,7 +317,7 @@ function openRepositorySecretCheckPanel(e){
     pnl.find(".btn-ok").off('click');
     pnl.find(".btn-ok").on(
         'click', {
-            url: "http://localhost:8081/api/secrets/check",
+            url: "http://" + window.location.host + "/api/secrets/check",
             method: "POST",
             getData: function(){
                 let pnl = $("#pnlRepoSecretCheck");
@@ -357,6 +346,15 @@ function openRepositorySecretCheckPanel(e){
     });
 }
 
+function openErrorPanel(error){
+
+    $("#pnlError").modal({
+        escapeClose: false,
+        clickClose: false,
+        showClose: false
+    });
+}
+
 function webRequest(e){
     e.preventDefault();
     $.ajax({
@@ -364,11 +362,13 @@ function webRequest(e){
         type: e.data.method,
         dataType: 'json',
         data: JSON.stringify(e.data.getData()),
-           headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-           },
-           success: e.data.callback
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        success: e.data.callback
+    }).fail(function(error){
+        openErrorPanel(error);
     });
 }
 //window.location.host

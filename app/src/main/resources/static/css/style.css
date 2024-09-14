@@ -1,94 +1,131 @@
 body{
-    background-color: #f0fffb ;
-}
+    background: rgb(249,251,255);
+    background: linear-gradient(191deg, rgba(249,251,255,1) 0%, rgba(43,97,168,0.6320728975183824) 70%, rgba(52,134,241,0.6180672952774859) 100%);
 
-#pnlMain{
-    margin: auto;
-    width: 90%;
     height: 100%;
-    display: block;
-    border: 3px solid green;
-    padding: 10px;
-   /* position: absolute;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#header{
+    display:block;
+    position: absolute;
+    left:0;
+    right:0;
     top: 0;
-    bottom: 0;*/
-}
-
-#pnlMain h1{
+    height: 80px;
+   /* background: #f3fafd;*/
     text-align:center;
-    font-size: 2.50em;
 }
 
+#header h1{
+    margin-top: 2px;
+    color: #212121;
+    font-size: 30px;
+
+}
 
 #pnlRepo{
-    margin: auto;
-    width: 95%;
-    border: 3px solid green;
+    margin-top:40px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+
+    width: 75%;
     padding: 10px;
+}
+
+#btnAddRepo{
+    font-size: 10px;
+    float: right;
+    color: #dadada;
 }
 
 #tblRepo{
     margin: auto;
     width: 100%;
     padding: 0px;
-    border:1px solid black;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid #fff;
 }
 
 
 #tblRepo th{
-    background-color: #434343;
-    border:1px solid black;
-    color: #fdfdfd;
-    font-weight: bold;
+background: rgb(1,1,1);
+background: linear-gradient(0deg, rgba(1,1,1,1) 3%, rgba(119,118,118,1) 48%, rgba(0,0,0,1) 100%);
+color: #fdfdfd;
+font-weight: bold;
+position: sticky;
+top: 0;
+}
+
+#tblRepo .tr-repo-secret{
+    margin:38px;
+}
+
+#tblRepo tr:hover{
+   background: rgba(250,250,250,0.7);
+}
+
+
+.tr-repo td{
+    /*height: 30px;*/
+    /*font-size: 20px;*/
+    word-wrap:break-word;
+    background-color: rgba(22,22,22,0.3);
+    border-bottom: 1px solid #fff;
+    color: #eeeeee;
 }
 
 #tblRepo td{
-    border:1px solid black;
-}
-
-.tr-repo td{
-    background-color: #b0b9b6;
-    height: 30px;
-    font-size: 20px;
-}
-
-.tr-repo td.data{
     padding-left:5px;
-    width: 70%;
 }
 
 .tr-repo-secret td{
-    background-color: #ebf2f0;
-    height: 20px;
-    font-size: 15px;
+    background-color: rgba(222,222,222,0.3);
+    /*height: 20px;*/
+    /*font-size: 1.0em;*/
+    border-bottom: 1px solid #fff;
 }
 
 .tr-repo-secret td.data{
-    padding-left:15px;
+   /* padding-left:25px;*/
     width: 70%;
 }
 
 .btn{
-    margin: 2px;
+    margin-right: 4px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 
-
-
+.btn-repo-add, .btn-repo-edit, .btn-repo-delete,
+.btn-repo-secret-check, .btn-repo-secret-edit, .btn-repo-secret-delete{
+     float: right;
+     font-size: 15px;
+}
 
 
 @keyframes check-correct-animation {
-    0%   {background-color:#; left:0px; top:0px;}
-    25%  {background-color:yellow; left:200px; top:0px;}
-    50%  {background-color:blue; left:200px; top:200px;}
-    75%  {background-color:green; left:0px; top:200px;}
-    100% {background-color:red; left:0px; top:0px;}
+    0%   {background-color:#bfff7b; left:0px; top:0px;}
+    25%  {background-color:#8caf67; left:200px; top:0px;}
+    50%  {background-color:#bfff7b; left:200px; top:200px;}
+    75%  {background-color:#509308; left:0px; top:200px;}
+    100% {background-color:#8caf67; left:0px; top:0px;}
 }
 
 .check-correct {
     animation-name: check-correct-animation;
     animation-duration: 4s;
+}
+
+.ctrl.check-correct:after {
+    content: "Correct";
+    font-size: 15px;
+      color: #eeeeee;
 }
 
 @keyframes check-not-correct-animation {
@@ -103,3 +140,47 @@ body{
     animation-name: check-not-correct-animation;
     animation-duration: 4s;
 }
+
+.ctrl.check-not-correct:after  {
+    content: "Incorrect";
+    font-size: 15px;
+    color: #eeeeee;
+}
+
+.btn{
+    color: #222222;
+}
+
+.btn:hover{
+     color: #666666;
+}
+.popup{
+    display:block;
+    min-height: 150px !important;
+
+}
+
+.popup-header{
+    display:block;
+    margin-bottom: 10px;
+    height: 35px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: none;
+}
+
+.popup-input{
+    display:block;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.popup-footer{
+    margin-top: 15px;
+    width:100%;
+}
+
+.popup-footer .btn-save, .popup-footer .btn-close, .popup-footer .btn-ok{
+    float:right;
+}
+

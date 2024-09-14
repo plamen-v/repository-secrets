@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-//TODO! encript if secret value will not be used.
 @Repository
 public class RecordRepository  implements IRecordRepository {
     @Autowired
@@ -62,14 +61,14 @@ public class RecordRepository  implements IRecordRepository {
             em.remove(recordDB);
             return recordDB.toRecord();
         }
-        return null;//TODO!
+        return null;
     }
 
     @Override
     @Transactional
     public Secret saveSecret(Long recordId, String secretKey, String secretValue) {
         RecordDB recordDB = em.find(RecordDB.class, recordId == null ? 0 : recordId);
-        //TODO! what if not exists record
+
         if(!Objects.isNull(recordDB)) {
             //update
             Query query = em.createNativeQuery("UPDATE RECORDS_SECRETS SET secret_key = :secret_key, secret_value = :secret_value WHERE record_id = :record_id AND secret_key = :secret_key");
@@ -97,10 +96,14 @@ public class RecordRepository  implements IRecordRepository {
     public Secret deleteSecret(Long recordId, String secretKey) {
         RecordDB recordDB = em.find(RecordDB.class, recordId == null ? 0 : recordId );
         if(!Objects.isNull(recordDB)) {
-            recordDB.getSecrets().remove(secretKey);
-            em.persist(recordDB);
 
-            return new Secret(recordId, secretKey, null);
+            if(recordDB.getSecrets().contains(secretKey)){
+                recordDB.getSecrets().remove(secretKey);
+                em.persist(recordDB);
+                return new Secret(recordId, secretKey, null);
+            }else{
+                return null;
+            }
         }
 
         return null;

@@ -6,9 +6,9 @@ import org.lab.secrets.core.model.Secret;
 
 public interface IRecordService {
     List<Record> getAllRecords();
-    Record saveRecord(Record record);
-    Record deleteRecord(Long recordId);
-    Secret saveSecret(Long recordId, String secretKey, String secretValue);
-    Secret deleteSecret(Long recordId, String secretKey);
+    Record saveRecord(Record record) throws Exception;
+    Record deleteRecord(Long recordId) throws Exception;
+    Secret saveSecret(Long recordId, String secretKey, String secretValue) throws Exception;
+    Secret deleteSecret(Long recordId, String secretKey) throws Exception;
     Boolean isSecretCorrect(Long recordId, String secretKey, String secretValue);
 }

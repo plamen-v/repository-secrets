@@ -3,6 +3,7 @@ package org.lab.secrets;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
@@ -13,5 +14,12 @@ public class AppConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedMethods("POST", "PUT", "DELETE", "GET")
                 .allowedOrigins("*");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
     }
 }

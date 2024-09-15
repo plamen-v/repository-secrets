@@ -15,11 +15,4 @@ public class AppConfiguration implements WebMvcConfigurer {
                 .allowedMethods("POST", "PUT", "DELETE", "GET")
                 .allowedOrigins("*");
     }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/resources/**")
-                .addResourceLocations("/resources/");
-    }
 }

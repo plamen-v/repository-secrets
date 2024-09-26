@@ -2,19 +2,19 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Repository Secrets</title>
+        <title>Records Secrets</title>
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     </head>
     <body>
         <div id="pnlApp">
-            <div id="header"><h1>Repository Secrets</h1></div>
-            <div id="pnlRepo">
-                <table id="tblRepo">
+            <div id="header"><h1>Records Secrets</h1></div>
+            <div id="pnlRecord">
+                <table id="tblRecord">
                     <thead>
                         <tr>
-                            <th style="width: 75%;">Repository</th>
-                            <th style="width: 15%;"><a id="btnAddRepo" class="btn" href="#"> Add Repository +</a></th>
+                            <th style="width: 75%;">Record</th>
+                            <th style="width: 15%;"><a id="btnAddRecord" class="btn" href="#"> Add Record +</a></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,21 +24,21 @@
             </div>
         </div>
 
-        <div id="pnlRepoAddEdit" class="modal popup">
+        <div id="pnlRecordAddEdit" class="modal popup">
             <div class="popup-header">
                 <span id="lblAction"></span>
             </div>
-            <input type="text" id="txtRepoUrl" placeholder="Enter repository URL" class="popup-input"/>
-            <input id="hdnRepoId" type="hidden" value=""/>
+            <input type="text" id="txtRecordUrl" placeholder="Enter record" class="popup-input"/>
+            <input id="hdnRecordId" type="hidden" value=""/>
             <div class="popup-footer">
                 <a class="btn btn-close" href="#" rel="modal:close">Close</a>
                 <a class="btn btn-save" href="#" >Save</a>
             </div>
         </div>
 
-        <div id="pnlRepoDelete" class="modal popup">
+        <div id="pnlRecordDelete" class="modal popup">
              <div class="popup-header">
-                <span id="lblAction">Delete Repository</span>
+                <span id="lblAction">Delete Record</span>
              </div>
              <div class="popup-footer">
                 <a class="btn btn-close" href="#" rel="modal:close">No</a>
@@ -46,14 +46,14 @@
             </div>
         </div>
 
-        <div id="pnlRepoSecretAddEdit" class="modal popup">
+        <div id="pnlRecordSecretAddEdit" class="modal popup">
              <div class="popup-header">
                   <span id="lblAction"></span>
              </div>
 
-            <input type="text" id="txtRepoSecretKey" placeholder="Enter secret key" class="popup-input"/>
-            <input type="text" id="txtRepoSecretValue" placeholder="Enter secret" class="popup-input"/>
-            <input id="hdnRepoId" type="hidden" value=""/>
+            <input type="text" id="txtRecordSecretKey" placeholder="Enter secret key" class="popup-input"/>
+            <input type="text" id="txtRecordSecretValue" placeholder="Enter secret" class="popup-input"/>
+            <input id="hdnRecordId" type="hidden" value=""/>
 
             <div class="popup-footer">
                 <a class="btn btn-close" href="#" rel="modal:close">Close</a>
@@ -61,26 +61,26 @@
             </div>
         </div>
 
-        <div id="pnlRepoSecretDelete" class="modal popup">
+        <div id="pnlRecordSecretDelete" class="modal popup">
             <div class="popup-header">
                   <span id="lblAction">Delete Secret</span>
             </div>
-            <input id="hdnRepoId" type="hidden" value=""/>
-            <input id="hdnRepoSecretKey" type="hidden" value=""/>
+            <input id="hdnRecordId" type="hidden" value=""/>
+            <input id="hdnRecordSecretKey" type="hidden" value=""/>
             <div class="popup-footer">
                 <a class="btn btn-close" href="#" rel="modal:close">No</a>
                 <a class="btn btn-ok" href="#" >Yes</a>
             </div>
         </div>
 
-         <div id="pnlRepoSecretCheck" class="modal popup">
+         <div id="pnlRecordSecretCheck" class="modal popup">
              <div class="popup-header">
                   <span id="lblAction">Check Secret</span>
             </div>
 
-            <input type="text" id="txtRepoSecretValue" placeholder="Enter secret" class="popup-input"/>
-            <input id="hdnRepoId" type="hidden" value=""/>
-            <input id="hdnRepoSecretKey" type="hidden" value=""/>
+            <input type="text" id="txtRecordSecretValue" placeholder="Enter secret" class="popup-input"/>
+            <input id="hdnRecordId" type="hidden" value=""/>
+            <input id="hdnRecordSecretKey" type="hidden" value=""/>
 
             <div class="popup-footer">
                 <a class="btn btn-close" href="#" rel="modal:close">Close</a>

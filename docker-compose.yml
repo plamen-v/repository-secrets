@@ -11,12 +11,19 @@ services:
       - POSTGRES_DB=$POSTGRESDB_DATABASE
     ports:
       - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U $POSTGRESDB_USER -d $POSTGRESDB_DATABASE'"]
+      interval: 5s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
     volumes:
       - db:/var/lib/postgres/data
       - ./db/initial.sql:/docker-entrypoint-initdb.d/init.sql
   app:
     depends_on:
-      - postgresdb
+        postgresdb:
+            condition: service_healthy
     build:
       context: .
       dockerfile: Dockerfile
@@ -32,7 +39,6 @@ services:
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
         "spring.jpa.hibernate.ddl-auto" : "update"
       }'
-
 
     stdin_open: true
     tty: true

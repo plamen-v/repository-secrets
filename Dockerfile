@@ -3,7 +3,8 @@ WORKDIR /secret_app
 COPY . .
 RUN mvn -X clean install -DskipTests=true
 WORKDIR /secret_app/app
-CMD ["mvn", "spring-boot:run"]
+
+CMD ["mvn", "flyway:migrate", "spring-boot:run"]
 
 
 
